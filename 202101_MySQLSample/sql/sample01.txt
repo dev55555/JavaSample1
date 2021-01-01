@@ -1,11 +1,15 @@
-＊＊＊＊＊＊＊＊＊＊ログイン＊＊＊＊＊＊＊
+---------------ログイン---------------
 mysql -u root -pasdf -h localhost
 mysql -u kiwi -pasdf -h localhost
-＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+---------------------------------------------
+＊DBの作成とユーザの作成
+create database if not exists kiwidb;
+create user if not exists kiwi@localhost identified by 'asdf';
+---------------------------------------------
 show databases;
 use kiwidb;
 show tables;
-＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+---------------------------------------------
 ＊テーブルの作成～データの入力～データの確認
 JDBC1.java用
 create table if not exists user (id int, name varchar(10), address varchar(10));
@@ -13,7 +17,7 @@ insert into user values (1, 'Yamada', 'Tokyo');
 insert into user (id, name) values (2, 'Suzuki');
 insert into user values (3, 'Hoshino', default);
 select * from user;
-＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+---------------------------------------------
 
 
 
