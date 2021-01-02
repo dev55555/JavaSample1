@@ -11,7 +11,7 @@ public class JDBC1 {
     public static void main(String[] args) {
 
         final String URL = "jdbc:mysql://localhost:3306/kiwidb?serverTimezone=JST";
-        final String USER = "kiwi";
+        final String USER = "root";
         final String PASS = "asdf";
         final String SQL = "select * from user where id = ? and name = ?;";
 

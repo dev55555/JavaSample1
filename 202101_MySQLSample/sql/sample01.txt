@@ -1,14 +1,17 @@
 ---------------ログイン---------------
 mysql -u root -pasdf -h localhost
-mysql -u kiwi -pasdf -h localhost
 ---------------------------------------------
-＊DBの作成とユーザの作成
+＊ユーザの作成
+create user if not exists 'kiwi'@'localhost' identified by 'asdf';
+＊権限付与
+grant create on *.* to kiwi@localhost;
+＊DBの作成
 create database if not exists kiwidb;
-create user if not exists kiwi@localhost identified by 'asdf';
+＊ログイン
+mysql -u kiwi -pasdf -h localhost
 ---------------------------------------------
 show databases;
 use kiwidb;
-show tables;
 ---------------------------------------------
 ＊テーブルの作成～データの入力～データの確認
 JDBC1.java用
@@ -18,11 +21,20 @@ insert into user (id, name) values (2, 'Suzuki');
 insert into user values (3, 'Hoshino', default);
 select * from user;
 ---------------------------------------------
+＊ワーニングの表示
+show warnings;
+＊ユーザの一覧表示
+select user, host from mysql.user;
+＊権限確認
+show grants for kiwi@localhost;
+＊DBの確認
+show databases;
+＊テーブルの確認
+show tables;
 
-
-
-
-
-
+＊ユーザの削除
+drop user kiwi@localhost;
+＊DB削除
+drop database kiwidb;
 
 
