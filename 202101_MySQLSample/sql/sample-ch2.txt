@@ -1,0 +1,131 @@
+＜＜＜＜＜＜＜＜＜＜SQL第2版用＞＞＞＞＞＞＞＞＞＞
+＜＜＜＜＜＜＜＜＜＜２章＞＞＞＞＞＞＞＞＞＞
+＊
+select shohin_id, shohin_mei, shiire_tanka
+  from Shohin;
+select * from Shohin;
+＊列に別名を付ける
+select shohin_id as id,
+       shohin_mei as namae,
+       shiire_tanka as tanka
+  from Shohin;
+select shohin_id as "商品ID",
+       shohin_mei as "商品名",
+       shiire_tanka as "仕入単価"
+  from Shohin;
+＊定数の出力
+select '商品' as mojiretsu,
+       38 as kazu,
+       '2009-02-24' as hiduke,
+       shohin_id,
+       shohin_mei
+  from Shohin;
+＊結果から重複行を省く
+select shohin_mei, shohin_bunrui, shiire_tanka from Shohin;
+select distinct shohin_bunrui from Shohin;
+select distinct shiire_tanka from Shohin;
+*distinct 複数列の場合
+select shohin_bunrui, torokubi from Shohin;
+select distinct shohin_bunrui, torokubi from Shohin;
+
+＊where句による行の選択
+select shohin_mei, shohin_bunrui
+  from Shohin
+  where shohin_bunrui = '衣服';
+select shohin_mei
+  from Shohin
+  where shohin_bunrui = '衣服';
+
+＊コメントの書き方
+--は、１行コメント
+/* */は、複数行コメント
+
+＊算術演算子と比較演算子
+select shohin_mei, hanbai_tanka,
+       hanbai_tanka * 2 as "hanbai_tanka * 2"
+  from Shohin;
+select shohin_mei, shohin_bunrui
+  from Shohin
+  where hanbai_tanka = 500;
+select shohin_mei, shohin_bunrui
+  from Shohin
+  where hanbai_tanka <> 500;
+select shohin_mei, shohin_bunrui, hanbai_tanka
+  from Shohin
+  where hanbai_tanka >= 1000;
+select shohin_mei, shohin_bunrui, torokubi
+  from Shohin
+  where torokubi < '2009-09-27';
+select shohin_mei, hanbai_tanka, shiire_tanka
+  from Shohin
+  where hanbai_tanka - shiire_tanka >= 500;
+
+＊文字列に不等号を使うときの注意点
+-- DDL：テーブル作成
+CREATE TABLE Chars
+(chr CHAR(3) NOT NULL,
+     PRIMARY KEY (chr));
+--SQL Server PostgreSQL
+-- DML：データ登録
+BEGIN TRANSACTION;
+INSERT INTO Chars VALUES ('1');
+INSERT INTO Chars VALUES ('2');
+INSERT INTO Chars VALUES ('3');
+INSERT INTO Chars VALUES ('10');
+INSERT INTO Chars VALUES ('11');
+INSERT INTO Chars VALUES ('222');
+COMMIT;
+*文字列型の順序は辞書順
+SELECT chr
+  FROM Chars
+ WHERE chr > '2';
+
+＊NULLに比較演算子は使えない
+SELECT shohin_mei, shiire_tanka
+  FROM Shohin
+ WHERE shiire_tanka = 2800;
+SELECT shohin_mei, shiire_tanka
+  FROM Shohin
+ WHERE shiire_tanka <> 2800;
+SELECT shohin_mei, shiire_tanka
+  FROM Shohin
+ WHERE shiire_tanka = NULL;
+SELECT shohin_mei, shiire_tanka
+  FROM Shohin
+ WHERE shiire_tanka IS NULL;
+SELECT shohin_mei, shiire_tanka
+  FROM Shohin
+ WHERE shiire_tanka IS NOT NULL;
+
+＊論理演算子
+＊NOT演算子
+SELECT shohin_mei, shohin_bunrui, hanbai_tanka
+  FROM Shohin
+ WHERE hanbai_tanka >= 1000;
+SELECT shohin_mei, shohin_bunrui, hanbai_tanka
+  FROM Shohin
+ WHERE NOT hanbai_tanka >= 1000;
+SELECT shohin_mei, shohin_bunrui
+  FROM Shohin
+ WHERE hanbai_tanka < 1000;
+
+＊AND演算子とOR演算子
+SELECT shohin_mei, shiire_tanka
+  FROM Shohin
+ WHERE shohin_bunrui = 'キッチン用品'
+   AND hanbai_tanka >= 3000;
+SELECT shohin_mei, shiire_tanka
+  FROM Shohin
+ WHERE shohin_bunrui = 'キッチン用品'
+    OR hanbai_tanka >= 3000;
+SELECT shohin_mei, shohin_bunrui, torokubi
+  FROM Shohin
+ WHERE shohin_bunrui = '事務用品'
+   AND torokubi = '2009-09-11'
+    OR torokubi = '2009-09-20';
+SELECT shohin_mei, shohin_bunrui, torokubi
+  FROM Shohin
+ WHERE shohin_bunrui = '事務用品'
+   AND ( torokubi = '2009-09-11'
+      OR torokubi = '2009-09-20');
+---------------------------------------------
