@@ -1,4 +1,6 @@
-package ramda;
+package lambda;
+
+import java.util.function.Consumer;
 
 // メソッド参照
 public class Example01 {
@@ -20,7 +22,16 @@ public class Example01 {
         Counter c = new Counter();
         obj2.walkArray(data, c::addLength);
         System.out.println("" + c.getResult());
+        System.out.println("-----");
 
+        // ラムダ式
+        MethodLambda obj3 = new MethodLambda();
+        obj3.walkArray(data, (String value) -> {
+            System.out.printf("[%s]\n", value);
+        });
+        System.out.println("-----");
+        // 省略形
+        obj3.walkArray(data, value -> System.out.printf("[%s]\n", value) );
         System.out.println("-----");
     }
 }
@@ -64,4 +75,14 @@ class Counter {
     }
 }
 
+// ラムダ式
+// 自前で準備したFunctionalInterfaceを使用しないで、
+// 標準ライブラリにあるConsumerを使用する
+class MethodLambda {
+    public void walkArray(String[] data, Consumer<String> output) {
+        for(var value : data) {
+            output.accept(value);
+        }
+    }
+}
 
