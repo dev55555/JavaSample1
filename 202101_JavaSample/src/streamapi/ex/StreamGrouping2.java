@@ -1,0 +1,20 @@
+package streamapi.ex;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class StreamGrouping2 {
+
+  public static void main(String[] args) {
+    System.out.println(
+        Stream.of("バラ", "あさがお", "さざんか", "うめ", "さくら")
+          .sorted()
+          .collect(
+            Collectors.groupingBy(
+              str -> str.length(),
+              Collectors.joining("/")
+          ))
+      );
+  }
+
+}

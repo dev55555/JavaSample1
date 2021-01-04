@@ -1,10 +1,12 @@
 package sample1;
 
+import java.util.Random;
+
 public class Example01 {
 
     public static void main(String[] args) {
 
-        System.out.println("テスト1");
-
+        var r = new Random();
+        System.out.println(r.nextInt(100));
     }
 }
