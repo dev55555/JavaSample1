@@ -96,10 +96,10 @@ public class Example03 {
 
         var set = new HashSet<String>();
         Stream.of(
-            new Person("山田", 40),
-            new Person("高野", 30),
-            new Person("大川", 35),
-            new Person("山田", 45)
+            new Person1("山田", 40),
+            new Person1("高野", 30),
+            new Person1("大川", 35),
+            new Person1("山田", 45)
           )
           .filter(p -> set.add(p.name))
           .forEach(System.out::println);
@@ -129,11 +129,11 @@ public class Example03 {
 }
 
 
-class Person {
+class Person1 {
     public String name;
     public int age;
 
-    public Person(String name, int age) {
+    public Person1(String name, int age) {
       this.name = name;
       this.age = age;
     }
